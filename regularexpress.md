@@ -1,17 +1,17 @@
 # linux
 
-> Regular expressions are sensitive to the locale in which the program runs; in particular,ranges within a bracket expression should be avoided in favor of character classes such as [[:alnum:]].
+> Regular expressions are sensitive to the locale in which the program runs; in particular,ranges within a bracket expression should be avoided in favor of character classes such as `[[:alnum:]]`.
 
 > The “longest leftmost” rule describes where text matches and for how long the match extends. This is important when doing text substitutions with sed, awk,or an interactive text editor. It is also important to understand when there is a distinction between a line and a string. In some programming languages,a single string may contain multiple lines,in which case ^ and $ usually apply to the beginning and end of the string.
 
 
-perl 正则表达式为 extented regular expression
+perl 正则表达式为 extended regular expression
 vim 为 basic regular expression
 
 
 php 正则表达式处理 utf-8 字符(php 中一共三种正则表达式,其中一种已经弃用了,一种用于匹配 utf8)
 
-> The last set is a variant of the ereg set, prefixing mb_ for "multibyte" to the function names. While ereg treats the regex and subject string as a series of 8-bit characters, mb_ereg can work with multi-byte characters from various code pages. If you want your regex to treat Far East characters as individual characters, you'll either need to use the mb_ereg functions, or the preg functions with the /u modifier. mb_ereg is available in PHP 4.2.0 and later. It uses the same POSIX ERE flavor.
+> The last set is a variant of the `ereg` set, prefixing mb_ for "multibyte" to the function names. While `ereg` treats the regex and subject string as a series of 8-bit characters, mb_ereg can work with multi-byte characters from various code pages. If you want your regex to treat Far East characters as individual characters, you'll either need to use the mb_ereg functions, or the preg functions with the /u modifier. mb_ereg is available in PHP 4.2.0 and later. It uses the same POSIX ERE flavor.
 
 在正则表达式中,<和>都不是特殊字符
 
@@ -24,7 +24,7 @@ preg_replace('/^(http|https):\/\/[^\/]+/i', '', $requestUri);
 ### bash basic regular expression
 
 * 向后引用
-> Backreferences are particularly useful for finding duplicated words and matchingquotes:
+> Back references are particularly useful for finding duplicated words and matching quotes:
 
 ```
 Table 3-8. Unix programs and their regular expression type
@@ -77,7 +77,7 @@ the `\<` and `\>` operators.
 
 <! 匹配前面的,相当于对匹配的方向进行了一次否定
 
-<name> 表示给捕获的匹配起别名
+`<name>` 表示给捕获的匹配起别名
 
 *  (?=exp)  匹配exp前面的位置
 
