@@ -190,6 +190,7 @@ To swap all casing in a visual selection, press ~.
 Without using a visual selection, gU<motion> will make the characters in motion uppercase,
 or use gu<motion> for lowercase.
 
-
-
-
+#### 将程序执行的结果追加到文件结尾
+```
+:.!php a.php
+```

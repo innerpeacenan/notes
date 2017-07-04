@@ -8,3 +8,7 @@ dbUnit setUp 方法在允许每个测试用例的时候都会清空一次数据�
 
 个人常用的 phpUnit test 运行命令
 `phpunit --verbose --bootstrap /home/wwwroot/www.note.git/public/index-test.php --filter testUpdate  ItemTest.php`
+
+
+codecept:
+codecept run codeception/acceptance/AboutCept.php

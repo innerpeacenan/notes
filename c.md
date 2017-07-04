@@ -16,6 +16,12 @@ options:
     debugging information.
     带调试信息(有这个选项才能用gdb)
 
+-ggdb
+     Produce debugging information for use by GDB.  This means to use
+     the most expressive format available (DWARF 2, stabs, or the native
+     format if neither of those are supported), including GDB extensions
+     if at all possible.
+
 -o 输出文件名称
 
 -llibrary 编译时候引入外部库
@@ -106,10 +112,43 @@ clean:
 
 
 ## c 语言语法
+
 ### 初学 c 语言最容易犯的错误
+
 结构体的格式要牢记 (成员之间用; 结构体结尾用;)
+// unnamed struct/union that defines no instances
+
+// 结构体后面需要加结构体变量的名称
+
+// 结构体定义
+
+```
+struct house {
+float sqft;
+int rooms;
+int stories;
+char address[40];
+};
+// 初始化
+struct house fruzt = {1560.0, 6, 1, "22 Spiffo Road"};
+```
+
+// expected identifier or ‘(’ before ‘[’ token
+
+// 数组的写法上要与java区分开来
+
+```
+char abbr[3] ;
+```
+
+c 语言中指针的声明和赋值不能同时进行
+
+c 语言中不存在 !== ,虽然知道c是强类型语言,但php写惯了,老范这个错误
+
+
 
 单引号为字符，双引号为字符串
+
 
 define 后边不能很 ";"
 > error: expected ‘)’ before ‘;’ token.  do not use ; for define ,it is just macro for preprocessor, not for c compiler
@@ -130,9 +169,17 @@ a 只有为指针的情况下,才可以 以 -> 的方式访问结构体的成员
     >>	Shift right
 ```
 
-浮点数比较大小
+Binary Floating Point 浮点数比较大小
+
 ```
 assert( dist - 6.71 < EPSILON );
+
+```
+
+```
+// format ‘%S’ expects argument of type ‘wchar_t *’, but argument 3 has type ‘char *’
+// 字符串格式化输出用 %s, 不要写成了大写
+printf("there are %d days till the end of %s",days,year[monthNum - 1].name);
 
 ```
 
@@ -144,12 +191,48 @@ do {
 ```
 
 打印指针位置
+
 ```
 printf("%p \n",link p);
 ```
+打印8进制和16进制
 
+```
+printf
+%0   八进制
+%x   十六进制
+```
+
+利用宏定义更加友好的 printf 函数
+
+
+```
+#define PR(X, ...) printf("Message " #X ": " __VA_ARGS__) /*注意书上直接粘贴过来有错误*/
+int main(void)
+{
+    double x = 48;
+    double y;
+    y = sqrt(x);
+    PR(1, "x = %g\n", x);
+    PR(2, "x = %.2f, y = %.4f\n", x, y);
+    return 0;
+}
+
+```
+
+
+```
+ if (scanf("%d",&n) != 1)
+       {
+           puts("That's no integer!");
+           atexit(too_bad); /* register the too_bad() function */
+           exit(EXIT_FAILURE);
+       }
+
+```
 
 argc argv c语言终端输入:
+
 ```
 main (int argc, char *argv[]){
 // argc is an integer parameter, and it is the number of arguments passed to the program.
@@ -223,6 +306,22 @@ Portable allocation:
 Or, better still:
  long *longPtr = malloc(sizeof(*longPtr)*1000);  /* allocating storage for 1000 long */
 ```
+
+
+static 关键字
+
+[static key word](http://blog.csdn.net/21aspnet/article/details/1535573)
+
+
+
+
+
+
+
+
+
+
+
 
 ## gdb 带参数调试
 gdb start 传入的参数
