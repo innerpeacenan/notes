@@ -1,0 +1,36 @@
+{
+  "coordinate_detail": {
+    "check_in": {
+      "id": 1650491,
+      "trans_event_id": 3002905,
+      "type": 400,
+      "longitude": 116.404896,
+      "latitude": 39.999311,
+      "address" : "西门子大厦",
+      "coord_sys": 2,
+      "client_ip": "",
+      "created_at": "2017-09-14 10:51:17",
+      "updated_at": "2017-09-14 10:51:17",
+      "picture_url": "",
+      "operation_source": 0,
+      "created_at_display": "09-14 10:51"
+    },
+    "complete": {
+      "id": 1650493,
+      "trans_event_id": 3002905,
+      "type": 900,
+      "longitude": 116.404897,
+      "latitude": 39.999311,
+      "address" : "卧龙小区",
+      "coord_sys": 2,
+      "client_ip": "",
+      "created_at": "2017-09-14 11:42:48",
+      "updated_at": "2017-09-14 11:42:48",
+      "picture_url": "",
+      "operation_source": 0,
+      "created_at_display": "09-14 11:42"
+    }
+  },
+  "code": 0,
+  "info": {}
+}

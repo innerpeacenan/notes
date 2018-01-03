@@ -1,0 +1,34 @@
+<request>
+    <actionType>700</actionType>
+    <uniqueValue>WB0122022373#1497322966861</uniqueValue>
+    <orderCode>LP0110009185</orderCode>
+    <packageCode>T01220223750002</packageCode>
+    <operationTime>1509638400000</operationTime>
+    <operator>王小二</operator>
+    <refusedCause>王小三损害</refusedCause>
+    <imgs>
+        <uri>http://100.69.201.232/getObject.do?Date=Tue, 13 Jun 2017 03:02:47 GMT&amp;
+            Auth=DSS+ENK92yS9NFWxUYGg%3Af0wa3D8DoAERc2yz%2BGeCDd0MSzA%3D&amp;OrderType=ZPB&amp;
+            ObjectName=ba45c8f60456a672e003a875e469d0eb-6768aba1628742f4a7bf1e952ffaa892-Desert.jpg
+        </uri>
+    </imgs>
+</request>
+
+
+<request>
+<actionType>600</actionType>
+<uniqueValue>6200
+    0000239146465-4#1509838363543
+</uniqueValue>
+<orderCode>62000000239146465</orderCode>
+<packageCode>62000000239146465-4</packageCode>
+<operationTime
+>1509838363543
+</operationTime>
+<operator>\u5218\u6587\u8d22</operator>
+<imgs>
+    <uri>62000000239146465-75c4cf1a8acf45218a2b66358c6abf68-ZYB_150983836
+        2.883197.jpg
+    </uri>
+</imgs>
+</request>
