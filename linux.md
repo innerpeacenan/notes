@@ -11,6 +11,7 @@ By default in Ubuntu and Linux Mint the terminal shortcut key is mapped to Ctrl+
   R 为shift键和r同时按下
 > 命令行中输入<ctr>+R，然后输入过往命令的key word，你就很容易找到以前执行过的命令了
 ```
+
 [history 中非常实用和有趣的功能](https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps)
 shell 历史命令追加模式
 shopt -s histappend
@@ -726,7 +727,6 @@ f show full process
 e equivalent to option e
 
 查看 nginx 的状态
-```
 /etc/init.d/nginx status
 ```
 
@@ -781,12 +781,25 @@ ssh-keygen -t rsa -C "ip@username"
 ssh-copy-id -i ~/.ssh/id_rsa.pub  root@192.168.0.3
 ```
 
+ssh配置项
+
+```
+ClientAliveInterval 30
+ClientAliveCountMax 6
+```
+
+ClientAliveInterval表示上述多少次心跳无响应之后，会认为Client已经断开。
+
 troube-shooting:
 问题描述:
 
 iptables 已经卸载了, 端口已经放开了, 没有sshd 配置
 
 发原因:s现该机器根本没有安装ssh
+
+
+
+
 
 ### scp 远程拷贝文件
 
@@ -887,7 +900,6 @@ Escape character is '^]'
 
 [删除含有特殊字符的文件](https://www.linux.com/blog/linux-shell-tip-remove-files-names-contains-spaces-and-special-characters-such)
 
-```
 
 Tip #3: Try a ./ at the beginning of the filename
 
@@ -947,12 +959,63 @@ dns 永久配置文件
 72 机器是 centos, 这一点需要注意
 sudo yum install man
 
-useradd -r 创建系统用户
+### useradd
+
+useradd [options] userName
+
+options
+
+-g 基本组 
+-P password 
+-d /home/ffz 
+-m createHomeDirectoryIfHomeDirNotExist 
+-G commaSeparatedGroups  
+-s shell 
+-c comment 
+-r 创建系统用户
+
+
+useradd 
 
 禁止用户登录 shell 
 
 useradd -r -g mysql -s /bin/false mysql
 
+### userdel
+
+删除ffz及其home目录
+
+userdel -r  ffz 
+
+### groups  jenkins
+
+show groups 
+
+### usermod
+
+usermod -aG ffz  增加一个组 -dm 移动原来的根目录到新的根目录
+
+usermod -l changeUserName
+
+### passwd
+
+从标准输入中获取密码
+passwd --stdin 
+
+
+删除用户 ffz 的密码
+passwd -d ffz  
+
+设置密码:
+
+passwd ffz
+
+
+### pwck
+
+pwck 
+
+verify integrity of password files
 
 ### du 查看文件大小
 
@@ -1034,4 +1097,12 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 grep 'http://192.168.0.99:10799/waybill/v1/order/insert' base/base.20171113.log | grep -oP 'source_name=(.*?&)' | awk -F'=' '{print $2}' | awk -F'&' '{print $1}' | sort | uniq
 
 
+### 网络问题
+
+strace -o /tmp/wtf -fF curl -v beeper_bi_api.api.d1.yn.cn
+
+
+强制重启网卡
+
+/etc/init.d/networking force-reload
 

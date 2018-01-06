@@ -87,12 +87,16 @@ As CMS noted, this works for visual mode selection as well - just use vi), vi}, 
 ```
 
 操作结束后，会在每行留有一个$符号，因此，该行不会被删除，下面几个例子同理
+
+替换是在命令模式下进行的
 ```
 删除行首多余空格： `%s/^ *//`
 删除沒有內容的空行：`%s/^$//` 或者 `g/^$/d`   %s/^$//
 删除包含有空格组成的空行：%s/^\s*$// 或者 g/^\s*$/d
 删除以空格或TAB开头到结尾的空行：%s/^[ |\t]*$// 或者 g/^[ |\t]*$/d
 把文中的所有字符串“abc……xyz”替换为“xyz……abc”可以有下列写法
+
+%s/\.test103\./\.m1\./
 ```
 
 ### 代码格式调整
@@ -227,4 +231,18 @@ set nolist
 "avoid beeping edit at 20171226
 set noerrorbells
 set vb t_vb=
+
+
+### 执行声明了解释器的脚本
+
+[Run PHP file from within vim](https://stackoverflow.com/questions/5622236/run-php-file-from-within-vim)
+
+:!%:p
+
+在vim内用php执行当前脚本
+
+!/usr/bin/php %
+
+
+
 

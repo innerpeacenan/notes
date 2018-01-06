@@ -384,3 +384,14 @@ git commit -am 'commit message'
 ### git 使用良好实践
 
 先拉分支, 再操作.完成后再删除分支
+
+
+### 把一个分支的代码提交到另外一个分支
+
+pushing to a non-default branch, you need to specify the source ref and the target ref:
+git push <remote> <branch with new changes>:<branch you are pushing to>
+
+
+
+
+

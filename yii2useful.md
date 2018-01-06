@@ -1912,12 +1912,67 @@ protected function parseMiddleware($middleware)
 
 
 
+```
+use Carbon\Carbon;
+$now = Carbon::now()->toDateTimeString();
+ //Check customer money monthly quota.
+        $start_time = Carbon::now()->startOfMonth()->toDateTimeString();
+        $now = Carbon::now()->toDateTimeString();
+
+
+// laravel 事务的使用方法
+$approvingModel = new $this->approvingModel;
+            $approvingModel->fill($params);
+
+            try {
+                DB::beginTransaction();
+
+                $welfareEvent->save();
+
+                $approvingModel->customer_welfare_event_id = $welfareEvent->id;
+                $approvingModel->save();
+
+                DB::commit();
+            } catch (\Exception $error) {
+                DB::rollback();
+                Log::error('Save welfare event error, message: ' . $error->getMessage() .
+                    ', file: ' . $error->getFile() . ', line: ' . $error->getLine());
+                throw $error;
+            }
+
+
+
+        if ($approvings) {
+            try {
+                DB::beginTransaction();
+
+                foreach ($welfareEvents as $welfareEvent) {
+                    $welfareEvent->save();
+                }
+
+                foreach ($approvings as $approving) {
+                    $approving->delete();
+                }
+
+                DB::commit();
+            } catch (\Exception $error) {
+                DB::rollback();
+                Log::error('Approve welfare event error, message: ' . $error->getMessage() .
+                    ', file: ' . $error->getFile() . ', line: ' . $error->getLine() .
+                    ', ids: ' . implode(',', $ids));
+                throw $error;
+            }
+        } else {
+            foreach ($welfareEvents as $welfareEvent) {
+                $welfareEvent->save();
+            }
+        }
+```
 
 
 
 
-
-
+http://beeper_fin_asc.api.d1.yn.cn/api/v1/record/business_log
 
 
 
