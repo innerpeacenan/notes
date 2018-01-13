@@ -10,8 +10,8 @@ whoami
 ## shell编程注意事项：
 (1)一定要有头文件
 `#!/bin/bash`
-(2)使用bashdb进行单步调试时，一定要让脚本先运行到这一句，可以通过n （表示next line）来运行到该行，再从终端输入交互的参数信息，才可以进一步调试，
-否则，程序还没有运行到这一步，必然提示输入的参数不是有效的命令
+
+(2)使用bashdb进行单步调试时,当有read等临时需要从终端读入的情况时,一定要让脚本先运行到这一句，可以通过n （表示next line）来运行到该行，再从终端输入交互的参数信息，才可以进一步调试，否则，程序还没有运行到这一步，必然提示输入的参数不是有效的命令
 
 ## basic concept
 
@@ -20,11 +20,11 @@ whoami
 $10 不能获取第十个参数，获取第十个参数需要${10}。当n>=10时，需要使用${n}来获取参数。
 $#	传递到脚本的参数个数
 $*	以一个单字符串显示所有向脚本传递的参数
+$@	与$*相同，但是使用时加引号，并在引号中返回每个参数。
+$?	显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
 $$	脚本运行的当前进程ID号
 $!	后台运行的最后一个进程的ID号
-$@	与$*相同，但是使用时加引号，并在引号中返回每个参数。
 $-	显示Shell使用的当前选项，与set命令功能相同。
-$?	显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
 ```
 
 ```
@@ -44,8 +44,6 @@ If you use an ampersand (&) instead of a semicolon,the shell runs the preceding 
 
 ```
 stty -g
-# result:
-# 4500:5:bf:8a3b:3:1c:7f:15:4:0:1:0:11:13:1a:0:12:f:17:16:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0
 ```
 
 
@@ -74,7 +72,6 @@ set -u
 set -e
 Exit immediately if a command exits with a non-zero status.
 
-
 查看 set -e 的含义的具体方法为:
 
 注意, -e 中的 - 在grep 命令中需要转义
@@ -82,6 +79,12 @@ Exit immediately if a command exits with a non-zero status.
 ```
 help set | grep '\-e'
 ```
+
+// turn debug trace off
+set +x 
+// turn debug trace on
+set -x
+
 
 ### /dev/null
 The null device is typically used for disposing of unwanted output streams of a process, or as a convenient empty file for input streams. This is usually done by redirection.

@@ -23,3 +23,5 @@ phpunit 隔离测试
 
 > 如果在低版本的 PHP unit test 中,放弃php 匿名类的使用的话,可以声明以不同的进程执行程序.期间可能由于安全原因, php_ini禁用了一些文件,重新启用这些程序就可以了.
 
+composer require --dev phpunit/dbunit
+

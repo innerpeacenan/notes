@@ -1970,12 +1970,16 @@ $approvingModel = new $this->approvingModel;
 ```
 
 
+laravel 验证规则扩展
+Validator::extend() 
 
+laravel 里边, Facade 和 provider 对对应关系.
 
-http://beeper_fin_asc.api.d1.yn.cn/api/v1/record/business_log
+以 /var/www/deploy/beeper_customer_web/current/项目为例,在 app/Repositories/Task/TaskRepository.php 文件中,JoinLibrary的使用方法,用user JoinLibrary这个短名称,则laravel 会找对应的外观类,查找方式以来配置.查看app/config/app.php,提供了JoinLibrary和其对应的外观类App\Facades\JoinLibraryFacade,从该类的 getFacadeAccessor 方法中, 找到Facade和provider di Container 中里边的关联字符串joinlibrary,
+用 grep  app/Providers 'joinlibrary' -nri --include='*.php'查找相关文件,找到
+APP\Provider\JoinLibraryServiceProvider这个类的register方法里边有这个单词,而且设置的是单利模式.则沿着该类继续往下找.
 
-
-
+发现实际上对应着App\Libs\JoinLibrary这个类,这样做的好处是该类本身只需要实例化一次,不需要重复实例化.
 
 
 

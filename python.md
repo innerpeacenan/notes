@@ -316,3 +316,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 https://www.crifan.com/python_detailed_explain_about___name___and___main__/comment-page-1/
 
 
+
+### python 函数语法糖
+
+*arg 可变参数
+arg=defaultValue 默认参数
+**kwarg keyworkd argument  传输时以 key2 = value2, key2 = value2 的形式传入 
+
+
+

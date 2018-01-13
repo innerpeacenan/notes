@@ -1,5 +1,13 @@
 [xdebug]
 zend_extension = "d:/wamp/bin/php/php5.4.12/ext/php_xdebug-2.3.3-5.4-vc9-x86_64.dll"
+
+xdebug 自动开启调试, 不需要在请求中传递 IDE key
+xdebug.remote_autostart=1
+
+
+
+
+
 #zend_extension = "d:/wamp/bin/php/php5.4.12/zend_ext/php_xdebug-2.2.3-5.4-vc9-x86_64.dll"
 ;加载xdebug模块。这里不能用extension=php_xdebug.dll的方式加载，必须要以zend的方式加载，否则安装上后，phpinfo是显示不出xdebug这个项的。
 

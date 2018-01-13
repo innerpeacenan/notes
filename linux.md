@@ -166,8 +166,6 @@ firefox
 ```
 
 
-
-
 ###  source 命令
 ```
 新产生一个shell然后再执行scripts的方法是在scripts文件开头加入以下语句
@@ -1105,4 +1103,23 @@ strace -o /tmp/wtf -fF curl -v beeper_bi_api.api.d1.yn.cn
 强制重启网卡
 
 /etc/init.d/networking force-reload
+
+重启php7.1-fpm服务
+/etc/init.d/php7.1-fpm reload
+[ ok ] Reloading php7.1-fpm configuration (via systemctl): php7.1-fpm.service.
+
+[ubantu  resolv.conf设定DNS被重置解决办法](http://blog.csdn.net/warrior_zhang/article/details/50204203)
+
+在 /etc/resolvconf/resolv.conf.d/base  加域名服务:
+
+nameserver xxx.xxx.xxx.xxx
+
+
+
+date -R
+
+ 将系统日期设定成1996年6月10日的命令
+date -s 06/22/96
+
+
 

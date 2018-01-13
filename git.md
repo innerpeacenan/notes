@@ -90,6 +90,15 @@ http://niaoyan.m1.yntesting.cn
 
 ```
 git log
+For full path names of changed files:
+git log --author="nanxiaoning" --name-only
+//For full path names and status of changed files:
+git log --name-status
+//For abbreviated pathnames and a diffstat of changed files:
+git log --stat
+git log --reverse
+//would get 10 last commits then reverse list
+git log -10 --reverse 
 git log --graph --pretty=oneline --abbrev-commit
 git log --pretty=oneline --abbrev-commit
 git log --pretty=oneline
@@ -186,7 +195,15 @@ git diff newcommit:app/Http/Controllers/Task/Task.php  oldcommit:app/Http/Contro
 
 git diff 比较的是工作区和暂存区的差别
 
-git diff --cached 比较的是暂存区和版本库的差别
+
+
+比较的是暂存区和版本库的差别  --cached 和 --staged 是同义词
+git diff --cached
+git diff --staged --name-only HEAD
+
+
+
+[显示某两次提交间的变化的文件](https://coderwall.com/p/lz0uva/find-all-files-modified-between-commits-in-git)
 
 ### git remote
 查看远程分支:
@@ -203,15 +220,7 @@ git ls-remote -h ssh://git@dev.xunhuji.me:17999/beeper/beeper_develper_platform.
 ```
 
 
-### git rebase
 
-```
-这个可以跳过 rebase 中间过程的错误
-git rebase --skip
-git status 查看每一次 rebase 失败详情
-解决完冲突执行:
-git rebase --continue
-```
 
 ## git 常见问题
 
@@ -219,7 +228,11 @@ git rebase --continue
 要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
 
 origin 为远程版本库的
-git push --set-upstream origin  nanxiaoning/dev
+```
+git push --set-upstream origin nanxiaoning/dev
+git push --set-upstream origin nanxiaoning/BEEPER-46417
+```
+
 
 [已经添加了 SSH key，但是 push 的时候，需要输入，用户名和密码](https://github.com/innerpeacenan/learning_git_from_liao/blob/master/%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%AF%8F%E6%AC%A1push%E9%83%BD%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81.md)
 
@@ -297,16 +310,6 @@ allownonascii=$(git config --bool hooks.allownonascii)
 
 
 
-
-
-
-
-
-
-
-
-
-
 ## 多人协作
 
 git clone git@github.com:michaelliao/learngit.git
@@ -362,7 +365,8 @@ git config --global merge.tool meld
 git mergetool -t meld .
 ```
 ### git 切换到上一个分支
-
+// git checkout to previous branch
+git checkout -
 git checkout @{-1}
 
 [git 冲突解决](https://www.zhihu.com/question/21215715)
@@ -391,7 +395,41 @@ git commit -am 'commit message'
 pushing to a non-default branch, you need to specify the source ref and the target ref:
 git push <remote> <branch with new changes>:<branch you are pushing to>
 
+git rebase master , then see many commits
+
+use git rebase -i master, only see one commits
+
+git rebase -i master
+
+### git rebase -i 最佳实践
+进入后, 将第一个以外的 pick 改为f, 这种方式合并代码非常快
+合并之前, 最好先更新rebase的目标分支, 然后rebase的目标分支
+
+可以不切换到特性分支直接 rebase
+
+```
+这个可以跳过 rebase 中间过程的错误 (除非真的确定不需要, 否则慎用)
+git rebase --skip
+git status 查看每一次 rebase 失败详情
+解决完冲突执行:
+git rebase --continue
+```
+
+```
+git rebase [主分支] [特性分支]
+跨分支 rebase
+git rebase --onto master server client
+If <特性分支> is specified, git rebase will perform an automatic git checkout <branch> before doing anything else. Otherwise it remains on the current branch.
+
+git rebase master topic 相当于
+
+git checkout topic 和 git rebase master
+```
+
+[分支的衍合](https://git-scm.com/book/zh-tw/v1/Git-分支-分支的衍合)
 
 
+### git pull request
 
+实际上等同于让另外一个人做了一次无冲突的merge
 

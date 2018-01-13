@@ -1107,6 +1107,26 @@ array_key_exists() expects parameter 2 to be array, null given
 类型一定要确定好.
 
 
+尽管 = 比其它大多数的运算符的优先级低，PHP 仍旧允许类似如下的表达式：if (!$a = foo())，在此例中 foo() 的返回值被赋给了 $a。
+
+### PDO 的异常处理设置
+
+$pdo = new PDO('mysql:host=localhost;dbname=someTable', 'username', 'password', array(
+  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+));
+
+
+### set protected and private member accessble
+
+```
+$app = $this->app;
+$db = $app->stubdb;
+$this->assertInstanceOf('\\PDO',$db);
+$r = new  \ReflectionObject($app->container);
+$p = $r->getProperty('_singletons');
+$p->setAccessible(true); // <--- you set the property to public before you read the value
+$singletons= $p->getValue($app->container);
+```
 
 
 

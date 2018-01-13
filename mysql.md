@@ -359,9 +359,6 @@ SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 
-
-
-
 mysqldump
 https://stackoverflow.com/questions/14022859/mysql-dump-database-along-data
 
@@ -369,5 +366,14 @@ https://stackoverflow.com/questions/14022859/mysql-dump-database-along-data
 mysql --auto-rehash -h ip -P 3306 -u userName -pPassWord DatabaseName
 ```
 
+mysql 安装:
+
+依赖boost,
+
+wget   http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz
+
+sudo mv ../boost_1_59_0.tar.gz  /usr/local/mysql/boost/
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DENABLED_LOCAL_INFILE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DDOWNLOAD_BOOST=1  -DWITH_BOOST=/usr/local/mysql/boost
 
 
