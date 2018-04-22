@@ -14,9 +14,11 @@ git 配置用户名和邮箱
 
 ```
 // git 忽略文件权限更改,本地可用
-git config core.filemode false
+git config --global core.filemode false
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
+// 修改branch 的描述
+git branch --edit-description
 ```
 参考:
 https://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes
@@ -111,16 +113,17 @@ HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历�
 ### git stash
 
 ```
+# 修改了master代码, 不想在master上直接提交, 而是想在 nanxiaoning/api 分支上提交, 此时的处理方法
 #保存现场
 git stash
-git stash list
+git checkout -b  nanxiaoning/api
 #采用 git stash pop 来恢复
 git stash pop
+# 重看列表
+git stash list
 
-# 修改了master代码, 不想在master上直接提交, 而是想在 nanxiaoning/api 分支上提交, 此时的处理方法
-git stash
-git checkout -b  nanxiaoning/api
-git stash pop
+git stash save '派车单导出'
+
 ```
 
 ### git remote
@@ -151,6 +154,8 @@ origin  git@github.com:michaelliao/learngit.git (push)
 显示 56ad47d2cc335d36137819644ca354725a204773 相比上次提交的变化
 git show 56ad47d2cc335d36137819644ca354725a204773
 git show <tagname>
+git show --name-only fe146839ed1412934a3e1d38a5143a01f7d489a3
+显示一次提交用了那些文件
 ```
 
 ### git tag
@@ -193,6 +198,9 @@ git diff newcommit:app/Http/Controllers/Task/Task.php  oldcommit:app/Http/Contro
 
 `git checkout -- file` 命令中的 -- 很重要，没有 --，就变成了“切换到另一个分支”的命令，我们在后面的分支管理中会再次遇到 `git checkout` 命令。
 
+git diff --name-only  933cc6179b43e4aa5d1e477375b0c85cd4285b3d ea13ad7669ddcee55ee7e659edddd14d08ee3544
+
+
 git diff 比较的是工作区和暂存区的差别
 
 
@@ -219,8 +227,9 @@ git remote -v
 git ls-remote -h ssh://git@dev.xunhuji.me:17999/beeper/beeper_develper_platform.git
 ```
 
+### git cherry-pick
 
-
+git cherry-pick bf616799e3326184ed3b5533f32e3bf704e90752
 
 ## git 常见问题
 
@@ -300,16 +309,6 @@ allownonascii=$(git config --bool hooks.allownonascii)
 
 
 
-
-
-
-
-
-
-
-
-
-
 ## 多人协作
 
 git clone git@github.com:michaelliao/learngit.git
@@ -335,6 +334,43 @@ git commit -m "add /usr/bin/env"
 ```
 
 第一次 push 的话,需要与远程库关联
+
+
+
+这个单词是错误的
+longtitude
+
+
+
+账单明细:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
 #git branch --set-upstream dev origin/<branch>
@@ -432,4 +468,17 @@ git checkout topic 和 git rebase master
 ### git pull request
 
 实际上等同于让另外一个人做了一次无冲突的merge
+
+cat .git/logs/HEAD
+
+
+
+取消工作区所有文件的修改
+
+git checkout -- .
+
+
+git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n
+git add . && git commit -nm 'f' && git push
+
 

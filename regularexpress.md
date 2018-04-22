@@ -204,3 +204,17 @@ Free-Spacing Regular Expressions
 
 > In free-spacing mode, whitespace between regular expression tokens is ignored. Whitespace includes spaces, tabs, and line breaks. Note that only whitespace between tokens is ignored. a b c is the same as abc in free-spacing mode.
 
+
+
+------------------------------------------------------
+
+
+php 贪婪和懒惰模式:
+
+http://www.regular-expressions.info/possessive.html
+
+贪婪匹配模式
+
+/home/wwwroot/composer/vendor/symfony/console/Command/Command.php:validateName
+
+

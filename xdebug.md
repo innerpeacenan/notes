@@ -4,6 +4,10 @@ zend_extension = "d:/wamp/bin/php/php5.4.12/ext/php_xdebug-2.3.3-5.4-vc9-x86_64.
 xdebug 自动开启调试, 不需要在请求中传递 IDE key
 xdebug.remote_autostart=1
 
+auto-remote-xdebug
+https://www.theaveragedev.com/xdebug-and-php-fpm-configuration/
+
+
 
 
 

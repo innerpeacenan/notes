@@ -101,6 +101,8 @@ grep -rn   --include="*.phpt" 'php_invoke'  .
 grep stock-history -r controllers/* models/* modules/*
 grep -rn   --include="*.phpt" 'php_invoke'  .
 grep  -P  '客户.信息' -rn  --include="*.php" current/ | more
+注意反斜线的匹配
+grep 'use App\\Repositories\\TransEvent\\TransEventRepository' -nr app/
 ```
 
 * 查看文件夹下的文件个数(当前目录的文件数)
@@ -317,6 +319,8 @@ awk -v RS="" '{ gsub("\n", "^Z"); print }' |
 sort -f |
 awk -v ORS="\n\n" '{ gsub("^Z", "\n"); print }' | Restore line structure
 grep -v '# SORTKEY' Remove markup lines
+
+awk -F 'message:\\['
 ````
 
 ```
@@ -403,9 +407,12 @@ uptime
 ps process status command
 ps -efl
 ps aux
+ps aux | grep 'ssh -t' | awk '{print $2;}' | xargs  kill
 who show who is login
 whoami
 // root
+
+
 ```
 
 
@@ -1121,5 +1128,43 @@ date -R
  将系统日期设定成1996年6月10日的命令
 date -s 06/22/96
 
+### 显示 256 种颜色
+Prints all 256 colors across the screen.
+
+$ (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)
+
+[终端输出颜色的原理](https://www.cnblogs.com/crabxx/p/4046498.html)
+
+```
+echo -e "\x1b[31;4;3;1;7mRed Underline Text\e[0m"
+```
 
 
+
+
+### 服务挂起到后台
+
+nohup command &
+
+
+### 进程管理
+
+查看进程实际对应的目录:
+sudo ls -l /proc/23347
+
+
+grep 'ssh'   ~/.bash_history  | tail -n 10
+
+
+### dpkg
+
+dpkg -l \*php*
+
+
+### redirect output
+You can redirect standard output and standard error to different files:
+
+nohup myprogram > myprogram.out 2> myprogram.err
+or to the same file:
+
+nohup myprogram > myprogram.out 2>&1

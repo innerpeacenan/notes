@@ -18,9 +18,19 @@
 > 当打开文件编辑完成后发现自己没有权限编辑该文件的时候
 > You might want to edit the file as a superuser like sudo vim FILE. Or if you don't want to leave your existing vim session (and know have proper sudo rights), you can issue:
 ```
-  :w !sudo tee % > /dev/null
+
+保存
+:w !sudo tee %
+:w !sudo tee % > /dev/null
 ```
 Which will save the file.
+
+查看最近打开的文件
+
+```
+old
+browse oldfiles
+```
 
 
 ### vim find in line
@@ -92,6 +102,10 @@ As CMS noted, this works for visual mode selection as well - just use vi), vi}, 
 
 [vim 查找和替换](http://vim.wikia.com/wiki/Search_and_replace)
 
+```
+// 单词边界匹配
+function create\>
+```
 
 ```
 删除行首多余空格： `%s/^ *//`
@@ -100,6 +114,13 @@ As CMS noted, this works for visual mode selection as well - just use vi), vi}, 
 删除以空格或TAB开头到结尾的空行：%s/^[ |\t]*$// 或者 g/^[ |\t]*$/d
 把文中的所有字符串“abc……xyz”替换为“xyz……abc”可以有下列写法
 %s/\.test103\./\.m1\./
+
+
+指定范围查找:
+406,418g/'get_all'/
+
+指定单位替换
+27,32s/d1/staging/
 ```
 
 ### 代码格式调整
@@ -156,6 +177,8 @@ bdel 1
 :nsplit(:nsp) -- 水平分割出一个n行高的窗口
 <C> ww 两个窗口来回切换
 <C> w j/k 窗口跳转
+
+sb6  open a new vim split from an existing buffer
 
 关闭一个窗口而不关闭一个buffer
 :hide
@@ -247,5 +270,31 @@ set vb t_vb=
 !/usr/bin/php %
 
 
+%s/^M$//g
 
+
+
+" 文件修改之后自动载入
+set autoread
+
+```
+:args
+%s/\.m1\./\.d1\./
+```
+
+vim 插件:
+
+git
+```
+Gdiff
+Gvdiff
+Gstatus
+Gblame
+```
+
+CtrlP
+```
+<c-x> 水平
+<c-v> verticle
+```
 

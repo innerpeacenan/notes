@@ -21,3 +21,27 @@ db.test.find(
 db.getCollectionInfos({"name":"warehouses"})
 
 
+db.drivers.update({},{"$set":{"is_chartered":false}},true,true)
+
+
+show dbs;
+use beeper2;
+show collections
+db.warehouses.find().pretty().limit(1)
+db.warehouses.find({cuid : 279}).pretty().limit(1)
+
+
+
+进一步细化的查询:
+db.warehouses.find({"cuid" : { $lt:279}}).pretty().limit(1)
+
+db.warehouses.find({"cuid" : { $lt:279} , "wid": 414}).pretty().limit(1)
+
+db.warehouses.find({ $or:[{"cuid" : { $lt:279} , "wid": 414}]}).pretty().limit(1)
+
+db.warehouses.find({"cuid" : {$lt:279}, $or:[{"wid": 414}, {"wid": 412}]}).pretty().limit(2)
+
+范围查询
+db.col.find({likes : {$lt :200, $gt : 100}})
+
+

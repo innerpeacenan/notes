@@ -1130,10 +1130,97 @@ $singletons= $p->getValue($app->container);
 
 
 
+### composer
+```
+command 预加载位置
+
+Difference between composer prefer-dist and prefer-source?(https://stackoverflow.com/questions/16205100/difference-between-composer-prefer-dist-and-prefer-source)
+
+
+根据composer command 查找对应的command类
+reate installed repo,
+
+
+包解析的关键位置:    /home/wwwroot/composer/src/Composer/Installer.php
+
+$operations = $this->processDevPackages($localRepo, $pool, $policy, $repositories, $installedRepo, $lockedRepository, 'force-updates', $operations);
+
+
+composer 从缓存中读取的代码:
+
+/home/wwwroot/composer/src/Composer/Cache.php:copyTo
+
+实际下载是从这里取:
+/home/wwwroot/composer/src/Composer/Util/RemoteFilesystem.php:copy和get方法
+
+/home/wwwroot/composer/src/Composer/Cache.php:compyFrom 方法将从远程下载的文件拷贝到本地缓存中,以供下次使用.比如
+source:/home/wwwroot/composer/vendor/symfony/polyfill-mbstring/19de91df66981b5ea94d6c7c3c497cd6
+toChache:/root/.composer/cache/files/symfony/polyfill-mbstring/624d730be0ea9edd5c8cfeb4aaf5d697d56f706b.zip
+
+
+composer.lock 相关的信息构建的位置为:
+/home/wwwroot/composer/src/Composer/Package/Dumper/ArrayDumper.php:dump:$data['time'] = $package->getReleaseDate()->format('Y-m-d H:i:s');
+```
 
 
 
+跟踪过程:
+
+```
+namespace Yunniao\Utils\Log\Handlers:getInstance():
+
+$driver = config('ynlog.driver');
+$appName = config('app.app_name', basename(base_path())); // 在具体某一次的发布版本里边, base_path 都取得是这里发布的release目录号
+$category = $appName . '.' . $category;
 
 
 
+use Yunniao\\Utils\\Log\\Processors\\RequestLogProcessor
+
+./current/vendor/yunniao/utils/src/Log/Logger.php:6:use Yunniao\Utils\Log\Processors\RequestLogProcessor;
+
+
+Yunniao\\Utils\\Log\\Logger;
+
+./current/vendor/yunniao/utils/src/Log/Providers/LoggerServiceProvider.php:6:use Yunniao\Utils\Log\Logger
+
+
+current/vendor/illuminate/support/ServiceProvider.php:63:    protected function mergeConfigFrom($path, $key)
+
+
+各个项目的配置同这个目录下的配置进行一次合并即可(项目配置覆盖库的默认配置)
+./current/vendor/yunniao/utils/src/config/ynlog.php
+
+
+vendor/yunniao/utils/src/Log/Processors/RequestLogProcessor.php:writeFile 问base具写log的信息的处理方式
+
+
+log type 属性目前有四种值, 分别是: "single", "daily", "hourly", "fluentd" 四种
+
+'type' => env('APP_REQUEST_LOG_TYPE', 'daily'),
+```
+
+
+表模式替换正则:
+
+```
+`(\w+)`([^`]+)'([^']+)',$
+
+'$1', // '$3'
+```
+
+
+f3 环境 reloead 版本信息
+reload redis
+sudo /usr/bin/redis-server /etc/redis.conf
+
+
+### 预发log
+
+内部api网关nginx log：/data/yn_online_logs/proxy_nginx_internal_api_gateway_logs
+外部代理ningx log：   /data/yn_online_logs/proxy_nginx_external_domain_name_logs
+预发php55 log: /data/yn_online_logs/new_staging_logs/php55
+预发php56 log: /data/yn_online_logs/new_staging_logs/php56
+预发node0 log: /data/yn_online_logs/new_staging_logs/node0
+预发node4 log: /data/yn_online_logs/new_staging_logs/node4
 

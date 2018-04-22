@@ -1981,12 +1981,15 @@ APP\Provider\JoinLibraryServiceProvider这个类的register方法里边有这个
 
 发现实际上对应着App\Libs\JoinLibrary这个类,这样做的好处是该类本身只需要实例化一次,不需要重复实例化.
 
+session()->get('errors ')
 
 
-
-
-
-
+    public function getBag($name)
+    {
+        return Arr::get($this->bags, $name, function () {
+            throw new InvalidArgumentException('Bag not registered.');
+        });
+    }
 
 
 
