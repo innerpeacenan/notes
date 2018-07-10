@@ -1224,3 +1224,12 @@ sudo /usr/bin/redis-server /etc/redis.conf
 预发node0 log: /data/yn_online_logs/new_staging_logs/node0
 预发node4 log: /data/yn_online_logs/new_staging_logs/node4
 
+
+
+$a = "world";
+$a = $a ? : "hello";
+
+// $a = "world";
+
+
+

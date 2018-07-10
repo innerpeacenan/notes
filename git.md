@@ -15,6 +15,8 @@ git 配置用户名和邮箱
 ```
 // git 忽略文件权限更改,本地可用
 git config --global core.filemode false
+// 针对每个项目修改,全局的设置可能被项目的设置覆盖
+git config core.filemode false
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 // 修改branch 的描述
@@ -31,6 +33,7 @@ https://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-c
 [core]
     editor = /usr/bin/vim
 ```
+
 
 * .gitignore
 

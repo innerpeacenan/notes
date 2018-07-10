@@ -1984,12 +1984,12 @@ APP\Provider\JoinLibraryServiceProvider这个类的register方法里边有这个
 session()->get('errors ')
 
 
-    public function getBag($name)
-    {
-        return Arr::get($this->bags, $name, function () {
-            throw new InvalidArgumentException('Bag not registered.');
-        });
-    }
+public function getBag($name)
+{
+    return Arr::get($this->bags, $name, function () {
+        throw new InvalidArgumentException('Bag not registered.');
+    });
+}
 
 
 

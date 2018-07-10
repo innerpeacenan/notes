@@ -1,50 +1,12 @@
 {
-  "type": "GET",
-  "url": "/business_unit/get_by_buid",
-  "title": "查询单个buid信息",
-  "group": "Business_unit",
-  "parameter": {
-    "fields": {
-      "Parameter": [
-        {
-          "group": "Parameter",
-          "type": "Number",
-          "optional": false,
-          "field": "buid",
-          "description": "<p>用户id</p>"
-        },
-        {
-          "group": "Parameter",
-          "type": "String",
-          "optional": true,
-          "field": "fields",
-          "description": "<p>指定需要返回的字段,默认返回全部字段,建议必传 <br> 允许值: 数据结构定义中全部字段</p>"
-        }
-      ]
-    }
-  },
-  "success": {
-    "fields": {
-      "Success 200": [
-        {
-          "group": "Success 200",
-          "type": "Object",
-          "optional": false,
-          "field": "info",
-          "description": "<p>bu用户信息</p>"
-        }
-      ]
-    },
-    "examples": [
+  "code": 0,
+  "msg": "成功",
+  "info": {
+    "list": [
       {
-        "title": "{",
-        "content": " {\n  \"code\": 0,\n  \"msg\": \"成功\",\n  \"info\": {\n    \"buid\": 1000081,\n    \"name\": \"北京\",\n    \"children_ids\": [\n      1000129,\n      1000125,\n      1000138,\n      1000206\n    ],\n    \"assistants\": [\n      \"刘诗杨-客服助理-北京1\",\n      \"刘建闯拓展\"\n    ],\n    \"members\": [\n      \"刘诗杨-客服经理-北京1\",\n      \"刘诗杨-客服经理-北京2\",\n      \"刘诗杨-客服助理-北京1\",\n      \"刘诗杨-客服经理-天津1\",\n      \"wangxue6\",\n      \"李雅（客服经理）\",\n      \"刘建闯拓展\"\n    ],\n    \"created_at\": \"2015-06-15 15:26:54\"\n  }\n}",
-        "type": "json"
+        "operator_id": 100000,
+        "operator_name": "zyf12"
       }
     ]
-  },
-  "version": "0.0.0",
-  "filename": "./app/V2/BusinessUnit/Controllers/BusinessUnitController.php",
-  "groupTitle": "Business_unit",
-  "name": "GetBusiness_unitGet_by_buid"
+  }
 }
