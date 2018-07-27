@@ -1168,3 +1168,71 @@ nohup myprogram > myprogram.out 2> myprogram.err
 or to the same file:
 
 nohup myprogram > myprogram.out 2>&1
+
+
+
+* 后台进程管理
+
+1. command  & 让进程在后台运行
+
+2. jobs –l 查看后台运行的进程
+
+3. fg %n 让后台运行的进程n到前台来
+
+4. bg %n 让进程n到后台去;
+
+
+```
+* umask 设置新文件默认权限 (不能直接利用umask命令创建一个可执行的文件，用户只能在其后利用chmod命令使它具有执行权限。)
+umask
+
+
+/**
+ * Saves the code into the file specified by [[path]].
+ * @return string|boolean the error occurred while saving the code file, or true if no error.
+ */
+public function save()
+{
+	$module = Yii::$app->controller->module;
+	if ($this->operation === self::OP_CREATE) {
+		$dir = dirname($this->path);
+		if (!is_dir($dir)) {
+			$mask = @umask(0);
+			$result = @mkdir($dir, $module->newDirMode, true);
+			@umask($mask);
+			if (!$result) {
+				return "Unable to create the directory '$dir'.";
+			}
+		}
+	}
+	if (@file_put_contents($this->path, $this->content) === false) {
+		return "Unable to write the file '{$this->path}'.";
+	} else {
+		$mask = @umask(0);
+		@chmod($this->path, $module->newFileMode);
+		@umask($mask);
+	}
+
+	return true;
+}
+
+Setting the umask to 0000 (or just 0) means that newly created files or directories created will have no privileges initially revoked. In other words, a umask of zero will cause all files to be created as 0666 or world-writable. Directories created while umask is 0 will be 0777.
+	
+			
+php umask
+umask() sets PHP's umask to mask & 0777 and returns the old umask.	
+
+```
+
+
+```laravel model 快速替换
+增加一张log表格,记录操作历史.
+
+use beeper_customer_api;
+
+
+`(\w+)`\s+.*comment '([^']+)',
+'$1', //$2
+```
+
+php -r 'var_export(yaml_parse_file("config/bigscreen.yaml"));'

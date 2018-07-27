@@ -378,3 +378,79 @@ sudo mv ../boost_1_59_0.tar.gz  /usr/local/mysql/boost/
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DENABLED_LOCAL_INFILE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DDOWNLOAD_BOOST=1  -DWITH_BOOST=/usr/local/mysql/boost
 
 
+
+### 表字符集不一致的解决方案
+select * from  bigscreen_token as token INNER join tv_code_mac as tv on CONVERT(tv.token USING utf8) COLLATE utf8_unicode_ci  = CONVERT(token.token USING utf8) COLLATE utf8_unicode_ci  where token.login_type = 1 and token.collection_id > 0 and token.expired_at > '2018-05-26 00:00:00' and token.disabled = 0  limit 12;
+
+select * from tv_code_mac as tv left join bigscreen_token as token on CONVERT(tv.token USING utf8) COLLATE utf8_unicode_ci  = CONVERT(token.token USING utf8) COLLATE utf8_unicode_ci where token.token_type = 0 and token.expired_at > '2018-05-26 00:00:00';
+
+
+
+
+
+
+
+
+
+// 选择innodb类型的表
+select table_name from INFORMATION_SCHEMA.TABLES where engine = 'InnoDB' and TABLE_SCHEMA = 'test';
+
+// 设置mysql事务级别
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED；
+
+
+
+悲观锁:
+
+1.
+Start Transaction;
+select * from test2017 where c = 3 for update;
+update test2017 set length = 12 where c = 3;
+commit;
+
+2.
+update test2017 set length = 11 where c = 3;
+
+
+select * from test2017 where c = 3;
+
+
+
+
+
+表锁, 页锁, 行锁
+共享锁(读锁) 排它锁(写锁)
+
+
+A事务加了读锁后, B事务不能加上写锁.
+
+
+
+
+
+
+
+
+
+
+```
+// 字符校验集不同
+select tv.*, t.id as tid , t.token as ttoken, c.id as cid, c.tv_code as tv_code  from tv_code_mac as tv left join tv_collection as c on c.tv_code  = CONVERT(tv.id USING utf8) COLLATE utf8_unicode_ci  left join bigscreen_token  as t on t.token = CONVERT(tv.token USING utf8) COLLATE utf8_unicode_ci where CONVERT(t.collection_id USING utf8) COLLATE utf8_unicode_ci  != CONVERT(c.id USING utf8) COLLATE utf8_unicode_ci;
+```
+
+
+```mysql
+-- 改密码
+set password for root@localhost = password('xxxxx'); 
+
+update user set password=password() where user='root';
+```
+
+
+
+3. 判断主从延迟的方法
+
+    MySQL提供了从服务器状态命令，可以通过 show slave status 进行查看,比如可以看看Seconds_Behind_Master参数的值来判断，是否有发生主从延时。
+其值有这么几种：
+NULL - 表示io_thread或是sql_thread有任何一个发生故障，也就是该线程的Running状态是No,而非Yes.
+0 - 该值为零，是我们极为渴望看到的情况，表示主从复制状态正常

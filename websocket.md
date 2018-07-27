@@ -1,0 +1,2 @@
+Upgrade: websocket
+Connection: Upgrade

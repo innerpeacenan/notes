@@ -21,6 +21,8 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 // 修改branch 的描述
 git branch --edit-description
+// 解决中文乱码问题
+git config --global core.quotepath false
 ```
 参考:
 https://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes
@@ -298,20 +300,6 @@ git rev-parse --show-toplevel
 git rev-parse --show-prefix
 
 
-
-* git 解决中文文件名乱码问题
-
-If you want to allow non-ASCII filenames set this variable to true.
-
-```
-allownonascii=$(git config --bool hooks.allownonascii) 
-```
-
-
-
-
-
-
 ## 多人协作
 
 git clone git@github.com:michaelliao/learngit.git
@@ -485,3 +473,22 @@ git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | 
 git add . && git commit -nm 'f' && git push
 
 
+
+
+### git rebase 工作流
+root@:/var/www/deploy/beeper_admin_web/current((no branch, rebasing nanxiaoning_0605))$git status
+rebase in progress; onto 553711c
+You are currently rebasing branch 'nanxiaoning_0605' on '553711c'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git reset HEAD <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+
+	both modified:   composer.lock
+
+no changes added to commit (use "git add" and/or "git commit -a")
+root@:/var/www/deploy/beeper_admin_web/current((no branch, rebasing nanxiaoning_0605))$git add composer.lock
+root@:/var/www/deploy/beeper_admin_web/current((no branch, rebasing nanxiaoning_0605))$git rebase --continue
