@@ -454,3 +454,8 @@ update user set password=password() where user='root';
 其值有这么几种：
 NULL - 表示io_thread或是sql_thread有任何一个发生故障，也就是该线程的Running状态是No,而非Yes.
 0 - 该值为零，是我们极为渴望看到的情况，表示主从复制状态正常
+
+
+### timestamp 建表
+建表timestamp默认时间:
+`created_at` timestamp NOT NULL DEFAULT '1970-01-01 08:00:01' COMMENT '创建时间'

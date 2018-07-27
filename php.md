@@ -1209,27 +1209,60 @@ log type 属性目前有四种值, 分别是: "single", "daily", "hourly", "flue
 '$1', // '$3'
 ```
 
-
-f3 环境 reloead 版本信息
-reload redis
-sudo /usr/bin/redis-server /etc/redis.conf
-
-
-### 预发log
-
-内部api网关nginx log：/data/yn_online_logs/proxy_nginx_internal_api_gateway_logs
-外部代理ningx log：   /data/yn_online_logs/proxy_nginx_external_domain_name_logs
-预发php55 log: /data/yn_online_logs/new_staging_logs/php55
-预发php56 log: /data/yn_online_logs/new_staging_logs/php56
-预发node0 log: /data/yn_online_logs/new_staging_logs/node0
-预发node4 log: /data/yn_online_logs/new_staging_logs/node4
-
-
-
 $a = "world";
 $a = $a ? : "hello";
 
 // $a = "world";
 
 
+### yaml 文件解析
+
+```
+php -r 'var_export(yaml_parse_file("config/bigscreen.yaml"));'
+```
+
+
+### PHP 7 新特性
+
+```
+标量类型声明 有两种模式: 强制 (默认) 和 严格模式。 现在可以使用下列类型参数（无论用强制模式还是严格模式）： 字符串(string), 整数 (int), 浮点数 (float), 以及布尔值 (bool)。它们扩充了PHP5中引入的其他类型：类名，接口，数组和 回调类型。
+
+返回值类型声明:
+function arraysSum(array ...$arrays): array
+
+通过 define() 定义常量数组
+
+
+// 闭包的执行
+Closure::call()
+
+
+
+
+assert:
+<?php
+ini_set('assert.exception', 1);
+
+class CustomError extends AssertionError {}
+
+assert(false, new CustomError('Some error message'));
+?>
+以上例程会输出：
+
+Fatal error: Uncaught CustomError: Some error message
+
+
+preg_replace_callback_array() 
+
+// php7 才支持
+(clone $foo)->bar()
+
+```
+
+
+* 理解了了php数组的底层实现方式(通过的在bucket中存放整个list中的连接关系,及每个bucket在传统拉链发bucket持有的pNext,pLast指针的基础上, 增加了pListNext,pListLast两个指针存放在整个数组中的链接关系)  这事php数组的实现原理.
+
+```
+HashTable->index(slot)->bucket->linkedList->item(pData,pDataPtr)
+```
 

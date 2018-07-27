@@ -125,11 +125,13 @@ history | grep -i "xxx"
 // -n line number
 grep -in cgi_sapi_module cgi/*
 ```
-### ls
+### ls 命令
 
-ls -lt sort by modified time
+按照修了日期排序:
 
-t modified time
+
+`ls -lt sort by modified time`
+
 
 ### 特殊符号
 * ~/ 表示当前用户的默认目录，对root用户，为"/root",对ffz用户，为"/home/ffz";
@@ -1235,4 +1237,16 @@ use beeper_customer_api;
 '$1', //$2
 ```
 
-php -r 'var_export(yaml_parse_file("config/bigscreen.yaml"));'
+
+
+
+
+
+### tree 命令
+
+
+```
+tree -L 1
+```
+### scp 命令
+(2) 复制目录：  scp -r local_folder remote_username@remote_ip:remote_folder  \

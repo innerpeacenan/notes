@@ -1,6 +1,12 @@
-设置customer log
 
-$this->log = app('ynlog')->custom('service');
+#### log
+
+```
+设置customer log
+// @todo 查看云鸟是否包装过
+app('ynlog')->custom('service');
+Log::notice('request complete!', ['cost' => $cost]);
+```
 
 ### Carbon
 
@@ -12,59 +18,20 @@ Carbon::now()->toDateTimeString()
 'work_time_start' => Carbon::now()->startofDay()->format('Y-m-d H:i:s'),
 'work_time_lte' => Carbon::now()->endOfDay()->format('Y-m-d H:i:s'),
 ]
+
+Carbon::now()->format('YmdHis')
+
 ```
+
 
 ### validate
 
+
+
+        
+        
 ```
-参数校验参考:
-$this->validate($request, [
-            'task_id'        => 'required',
-            'customer_price' => 'required|numeric',
-                        
-        ], [            
-            'task_id.required'        => '任务编号必传',
-            'customer_price.required' => '客户价格必传',                                                                                
-        ]);
-```
-
-
-### Model
-
-```
-protected $findable = [                                                                                                             
-        'id',   
-        'process_id',
-        'task_id',
-        'driver_price',
-        'customer_price',
-    ];       
-```
-
-
-### debug
-
-```
-\Symfony\Component\VarDumper\VarDumper::dump($this->customProviderCreators[$config['driver']]);die();
-```
-
-
-### 定时任务
-
-```
-crontab -e
-* * * * * php /var/www/deploy/beeper_customer_api/current/artisan schedule:run
-```
-
-### cookie
-
-```
-\Cookie::queue(\Cookie::forget('big_screen_access_token'));
-
-return response($body, 301)->send();
-```
-
-
+'feedbackTime' => 'required|date_format:Y-m-d H:i:s',
 
 ### validate
 
@@ -76,6 +43,15 @@ $validator = Validator::make($request->all(), [
     "name.*"  => "required|string|distinct|min:3",
 ]);
 
+$this->validate($request, [
+            'task_id'        => 'required',
+            'customer_price' => 'required|numeric',
+                        
+        ], [            
+            'task_id.required'        => '任务编号必传',
+            'customer_price.required' => '客户价格必传',                                                                                
+        ]);
+);
 $request->validate([
     'title' => 'required|unique:posts|max:255',
     'author.name' => 'required',
@@ -104,10 +80,12 @@ public function store(Request $request)
         dd($validator->errors()->all());
     }
 }
-
+```
 
 ### laravel 源码 validate代码模式
 
+
+```
 $method = "validate{$rule}";
 
 
@@ -161,7 +139,7 @@ Route::get('/test', function (Illuminate\Http\Request $request) {
 //        return $attribute . '不能包含敏感词汇:' . $sensiveWords;
 //    });
 
-    // 毁掉函数最多可定义四个参数
+    // 回调函数最多可定义四个参数
 //    $validator->addReplacer('max', function ($mesages, $attribute, $rule, $params) {
 //
 //        if ($attribute === 'title') {
@@ -182,3 +160,42 @@ array (
 )
      */
 });
+```
+
+### Model
+
+```
+protected $findable = [                                                                                                             
+        'id',   
+        'process_id',
+        'task_id',
+        'driver_price',
+        'customer_price',
+    ];       
+```
+
+
+### debug
+
+```
+\Symfony\Component\VarDumper\VarDumper::dump($this->customProviderCreators[$config['driver']]);die();
+```
+
+
+### 定时任务
+
+```
+crontab -e
+* * * * * php /var/www/deploy/beeper_customer_api/current/artisan schedule:run
+```
+
+### cookie
+
+```
+\Cookie::queue(\Cookie::forget('big_screen_access_token'));
+
+return response($body, 301)->send();
+```
+
+
+
